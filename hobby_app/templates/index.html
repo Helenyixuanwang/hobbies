@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <title>Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style2.css' %}">
+</head>
+
+
+<body>
+    <section>
+    
+    
+    <div class="container">
+        <h1  class="text-center">Welcome to Buddies and Hobbies</h1>
+        <div>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <span>
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                </span>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div id="register">
+            <img id="login-img" src="../static/images/chihiro-haku_7FyQ83E.jpg" alt="hhhh" width="100%">
+
+        </div>
+
+        <div id="login">
+            <h1 class="text-center">User Login</h1>
+            <form action="/login" method='POST'>
+                {% csrf_token %}
+
+                <div class="form-floating mb-3">
+                    <input type="email" name="email" class="form-control" id="floatingInput"
+                        placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" name="pw" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                </div>
+                <br>
+                <div class="btn-input ">
+                    <input type="submit" value="Log In" class="btn btn-primary form-control">
+                </div>
+                <div>
+                   <p>Don't have an account? <span id="signup"><a id="signup-link" href="/user/go_create"> Sign Up Here</a></span></p>
+                </div>
+            </form>
+        </div>
+        
+
+    </div>
+    </div>
+
+</section>
+</body>
+
+</html>

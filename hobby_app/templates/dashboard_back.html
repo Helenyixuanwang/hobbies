@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}dashboard{% endblock %}
+{% block head %}
+{{ block.super }}
+{% endblock %}
+{% block content %}
+
+<div class="bg-img">
+    
+    {% if request.session.name %}
+    <h3>Welcome {{request.session.name}}</h3><p>You have successfully registered !</p>
+    {% else %}
+    <h3>Success! Welcome {{this_user.first_name}}</h3><p>You have successfully logged in!</p>
+    {% endif %}
+
+
+
+   
+
+    <h3>Your hobby list:</h3>
+
+    
+            {% for hobby in all_hobbies reversed %} 
+            <div class="hobby-row">
+                <div class="hobby-img" >
+                <img class="h-img" src="/media/{{hobby.hobby_img}}"> 
+                </div>
+                <div class="hobby-content">
+                
+                <h4 class="hobby-text">{{hobby.name}}</h4>
+                <p class="hobby-text">{{hobby.description}}</p>
+                <p class="hobby-text">like: {{hobby.like.count}}</p>
+                
+                    <div class="self-edit">
+                    {% if this_user.id == request.session.user_id %}
+                    <a href="/hobbies/{{hobby.id}}/delete" class="btn btn-primary btn-hobby">remove</a>
+                    <a href="hobbies/{{hobby.id}}/edit" class="btn btn-primary btn-hobby">edit</a>
+                    {% endif %}
+                    </div>
+                
+                </div>
+            </div>
+            {% endfor %}
+             {% for hobby in liked_hobbies.all %}
+             <div class="hobby-display" width="50%">
+                 <a href="hobbies/{{hobby.id}}">{{hobby.name}}</a>
+                 {{hobby.description}}
+                 {{hobby.like.count}}
+                 <a href="/hobbies/{{hobby.id}}/dislike">Dislike</a>
+             </div>
+             {% endfor %}
+        
+        
+
+<hr>
+<h2>Buddies' hobbies</h2>
+
+<table class="table table-striped">
+    <thead>
+        <th>Hobby Name</th>
+        <th>Description</th>
+        <th>How many buddies like this</th>
+        <th>add to your liked hobbies?</th>
+    </thead>
+    <tbody>
+        {% for hobby in others_hobbies %} 
+         <tr>
+             <td><a href="hobbies/{{hobby.id}}">{{hobby.name}}</a></td>
+             <td>{{hobby.description}}</td>
+             <td>{{hobby.like.count}}</td>
+             <td><a href="/hobbies/{{hobby.id}}/like"><img src="static/images/thumbs-up.svg" alt="fdff"></td>
+         </tr>
+         {% endfor %}
+    </tbody>
+    
+</table>
+
+</div>
+    
+    
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}New Hobby{% endblock %}
+{% block head %}
+{{ block.super }}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+<h2>Hello {{this_user.first_name}}, Let's upload a new drawing! </h2>
+
+{% if messages %}
+<ul class="messages">    
+    {% for message in messages %}    
+    <span class="error_display"><li  {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li></span>  
+    {% endfor %}
+</ul>
+{% endif %}
+
+<form action="/hobbies/create" method='POST' enctype="multipart/form-data">
+    {% csrf_token %} 
+   
+    <div class="mb-3">
+    <label for="name">Name:</label>
+    <input type="text" name="name" class="form-control">
+    </div>
+    
+    <div class="mb-3">
+    <label for="description">Description</label>
+    <textarea name="description"  cols="5" rows="10" class="form-control"></textarea>
+    </div>
+    
+    
+    
+    <div class="mb-3">
+    <input type="file" name="image">
+    </div>
+    
+    
+    <div class="mb-3">
+    <input type="submit" value="create a new hobby" type="button" class="btn btn-primary">
+    
+    <a href="/dashboard" type="button" class="btn btn-primary">Cancel</a>
+    </div>
+</form>
+</div>
+{% endblock %}

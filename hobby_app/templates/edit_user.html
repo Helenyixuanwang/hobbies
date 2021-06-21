@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Edit User{% endblock %}
+{% block head %}
+{{ block.super }}
+{% endblock %}
+{% block content %}
+<h4>Upload a user image here</h4>
+<form action="/user/{{this_user.id}}/update" method='POST' enctype="multipart/form-data">
+    {% csrf_token %} 
+    <div class="mb-3">
+    <input type="file" name="user_img">
+    </div>
+    <div class="mb-3">
+    <input type="submit" value="update" type="button" class="btn btn-primary">
+    <a href="/dashboard" type="button" class="btn btn-primary">Cancel</a>
+    </div>
+</form>
+
+{% endblock %}

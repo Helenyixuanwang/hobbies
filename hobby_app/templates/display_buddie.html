@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Buddie display{% endblock %}
+{% block head %}
+{{ block.super }}
+{% endblock %}
+{% block content %}
+{% if this_user.id == request.session.user_id %}
+<h2>Let's get to know more about You</h2>
+{% else %}
+<h2>Let's get to know more about {{this_user.first_name}} {{this_user.last_name}}</h2>
+{% endif %}
+
+<img src="/media/{{this_user.user_img}}" height="auto" width="10%"  alt="...">
+<p>{{this_user.first_name}} {{this_user.last_name}} joined this site on {{this_user.created_at |date:'Y-m-d' }}</p>
+<p>Last updated on {{this_user.updated_at|date:'Y-m-d'}}</p>
+<h5>Upload a user image here</h5>
+{% if this_user.id == request.session.user_id %}
+<form action="/user/{{this_user.id}}/update" method='POST' enctype="multipart/form-data">
+    {% csrf_token %} 
+    <div class="mb-3">
+    <input type="file" name="user_img">
+    </div>
+    <div class="mb-3">
+    <input type="submit" value="update" type="button" class="btn btn-primary">
+    <a href="/dashboard" type="button" class="btn btn-primary">Cancel</a>
+    </div>
+</form>
+{% endif %}
+<hr>
+
+<h3 class="text-center">All the drawings {{this_user.first_name}} likes</h3>
+<table class="table  table-hover  ">
+    <thead>
+        
+            <th>Title</th>
+            <th>Description</th>
+            <th>creator</th>
+            <th>Comments by {{this_user.first_name}} {{this_user.last_name}}</th>
+            
+
+        
+    </thead>
+        <tbody>
+            {% for hobby in this_user.liked_hobbies.all %}  
+            <tr class="table-info table-success table-hover">
+                <td ><a href="/hobbies/{{hobby.id}}">{{hobby.name}}</a> </td>                      
+                <td>{{hobby.description}} </td>
+                <td><a href="/user/{{hobby.creator.id}}/display">{{hobby.creator.first_name}}{{hobby.creator.last_name}}</a></td>
+                <td>
+                    {% for comment in hobby.hobby_comments.all %}
+                    <ul>
+                        <ol><p class="comment-font">{{comment.content}} commented on {{comment.created_at}}</p></ol>
+                    
+                    </ul>
+                    {% endfor %}
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+</table>
+<hr>
+
+{% endblock %}

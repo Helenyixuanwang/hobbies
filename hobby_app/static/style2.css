@@ -1,0 +1,83 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+login-img {
+    width:100%;
+    height: auto;
+    
+  
+    min-height: 380px;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+
+}
+
+section {
+    display: flex;
+  justify-content: center;
+  align-items:center;
+    min-height:100vh;
+    background:linear-gradient(-30deg, #03a9f4 0%,#3a78b7 50%,#262626 50%, #607d8b 100%);
+  /* filter: hue-rotate(120deg); */
+  animation : animate 10s linear infinite;
+  }
+  @keyframes animate
+  {
+      0% 
+      {
+          filter: hue-rotate(0deg);
+      }
+      100% 
+      {
+          filter: hue-rotate(360deg);
+      }
+  }
+
+.container {
+    padding: 20px;
+    margin:110px auto;
+    height:auto;
+    width:40%;
+    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+/* error report */
+ul > span {
+    color:red;
+}
+
+#signup {
+    color:darkturquoise;
+
+}
+
+#welcome {
+    color: blue;
+}
+
+/* for register page */
+/* .background {
+    background-image: url("images/default.jpg");
+    height:auto;
+    background-repeat: repeat;
+    background-color:#000;
+    
+} */
+
+.reg {
+    height:100%;
+}
+
+#reg-container {
+    background-color:white;
+}
+
+#signup-link:hover, #signup-link:active  {
+    color: green;
+
+}

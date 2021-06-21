@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<!-- <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200&display=swap" rel="stylesheet"> -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    
+    <title>Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+</head>
+<body>
+    <div class="container bg-img">
+    
+    <h1>Welcome to Buddies and Hobbies!</h1>
+    
+        
+        <div class="error-report">
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+            <span><li  {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li></span>  
+            {% endfor %}
+        </ul>
+        {% endif %}
+        </div>
+  <div class="box">
+    <div class="reg">
+        <h1 class="topic">Registration</h1>
+        <form action="/user/create" method='POST'>
+        {% csrf_token %}
+        <div class="input1">
+        <label for="f_name" class="l-title">First Name</label>
+        <input type="text" name="f_name" class="l-content">
+        </div>
+        <div class="input1">
+        <label for="l_name" class="l-title">Last Name</label>
+        <input type="text" name="l_name" class="l-content">
+        </div>
+        <div class="input1">
+        <label for="email" class="l-title">Email</label>
+        <input type="email" name="email" class="l-content">
+        </div>
+        <div class="input1">
+        <label for="pw" class="l-title">Password</label>
+        <input type="password" name="pw" class="l-content">
+        </div>
+        <div class="input1">
+        <label for="pw_conf" class="l-title">Confirm PW</label>
+        <input type="password" name="pw_conf" class="l-content">
+        </div>
+        <div class="btn-input input2">
+        <input type="submit" value="Register">
+        </div>
+    </form>
+    </div>
+        
+    <div class="login">
+    <h1 class="topic">Login</h1>
+    <form action="/login" method='POST'>
+        {% csrf_token %}
+
+        <div class="input1">
+        <label for="email" class="l-title">Email</label>
+        <input type="email" name="email" class="l-content">
+        </div>
+        <div class="input1">
+        <label for="pw" class="l-title">Password</label>
+        <input type="password" name="pw" class="l-content">
+        </div>
+        <div class="btn-input input2">
+            <input type="submit" value="Log In">
+        </div>
+    </form>
+    </div>
+    
+    </div>
+</div>
+</body>
+</html>
